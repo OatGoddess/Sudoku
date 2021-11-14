@@ -4,8 +4,8 @@ export const Cell = ({ value, position, className = '', handleOnChange }) => {
       type='number'
       value={value}
       className={className}
-      onChange={() => {
-        handleOnChange(position)
+      onChange={event => {
+        handleOnChange(position, event.target.value)
       }}
     />
   )

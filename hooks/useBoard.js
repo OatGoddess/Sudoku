@@ -16,8 +16,9 @@ export function useBoard() {
   const [board, setBoard] = useState(defaultBoard)
 
   function update(position, newElement) {
+    const newValue = newElement.substr(newElement.length - 1)
     let copy = [...board]
-    copy[position.row][position.column] = newElement
+    copy[position.row][position.column] = newValue
     setBoard(copy)
   }
 

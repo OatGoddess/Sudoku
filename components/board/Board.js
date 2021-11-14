@@ -7,10 +7,11 @@ function needBottomBorder(rowIndex) {
 
 export const Board = ({ board, updateCell }) => {
   return (
-    <div class={styles.sudokuboard}>
+    <div className={styles.sudokuboard}>
       {board.map((row, rowIndex) => {
         return row.map((column, colIndex) => (
           <Cell
+            key={`r${rowIndex}c${colIndex}`}
             value={column != 0 ? column : ''}
             position={{ row: rowIndex, column: colIndex }}
             className={needBottomBorder(rowIndex) ? styles.bottomborder : ''}
