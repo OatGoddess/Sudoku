@@ -1,9 +1,11 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { Board } from '../components/board'
-import { useBoard } from '../hooks/useBoard'
+import { useBoard, useFetch } from '../hooks'
+import { useState } from 'react'
 
 export default function Home() {
+  const [difficulty, setDifficulty] = useState('easy')
   const { board, set, update, clear, validate } = useBoard()
 
   return (

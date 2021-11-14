@@ -13,6 +13,11 @@ const defaultBoard = [
 ]
 
 export function useBoard() {
+  /*TODO: we need this   const [ loading, error, value ] = useFetch(
+    `https://vast-chamber-17969.herokuapp.com/generate?difficulty=${difficulty}`,
+    {},
+    [difficulty]
+  )*/
   const [board, setBoard] = useState(defaultBoard)
 
   function update(position, newElement) {
