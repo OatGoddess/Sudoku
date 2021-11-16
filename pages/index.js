@@ -6,7 +6,7 @@ import { useState } from 'react'
 
 export default function Home() {
   const [difficulty, setDifficulty] = useState('easy')
-  const { board, set, update, clear, validate } = useBoard()
+  const { board, set, update, clear, validate } = useBoard(difficulty)
 
   return (
     <div className={styles.container}>
