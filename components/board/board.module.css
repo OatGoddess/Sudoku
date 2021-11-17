@@ -2,7 +2,6 @@
   box-sizing: content-box;
   border: 3px solid black;
   border-right: 2px solid black;
-  margin: auto;
   width: 540px;
   height: 540px;
   display: grid;
