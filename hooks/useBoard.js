@@ -51,19 +51,23 @@ export function useBoard() {
       })
   }
 
-  function update(position, newElement) {
+  const handleSetDifficulty = newDifficulty => {
+    difficulty !== newDifficulty ? setDifficulty(newDifficulty) : loadNewBoard()
+  }
+
+  const update = (position, newElement) => {
     const newValue = newElement.substr(newElement.length - 1)
     let copy = cloneGrid(board)
     copy[position.row][position.column] = parseInt(newValue)
     setBoard(copy)
   }
 
-  function clear() {
+  const clear = () => {
     setBoard(defaultBoard)
     setDifficulty(difficulties.none)
   }
 
-  function validate() {
+  const validate = () => {
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
         if (board[i][j] != 0 && !isValid(board, i, j, board[i][j])) {
@@ -74,7 +78,7 @@ export function useBoard() {
     return true
   }
 
-  function solve() {
+  const solve = () => {
     const resultBoard = cloneGrid(board)
     solvePuzzle(resultBoard)
     setBoard(resultBoard)
@@ -82,13 +86,11 @@ export function useBoard() {
 
   return {
     board,
-    set: setBoard,
     update,
     clear,
     validate,
     solve,
-    loadNewBoard,
-    setDifficulty,
+    setDifficulty: handleSetDifficulty,
     difficulty,
   }
 }

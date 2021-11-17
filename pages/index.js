@@ -1,22 +1,13 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { Board } from '../components/board'
-import { useBoard, useFetch } from '../hooks'
+import { useBoard } from '../hooks'
 import { useState } from 'react'
 import { difficulties, randomDifficulty } from '../common/util/difficulty'
 
 export default function Home() {
-  const {
-    board,
-    set,
-    update,
-    clear,
-    validate,
-    solve,
-    loadNewBoard,
-    difficulty,
-    setDifficulty,
-  } = useBoard(difficulty)
+  const { board, update, clear, validate, solve, difficulty, setDifficulty } =
+    useBoard()
   const [valid, setValid] = useState(true)
 
   return (
@@ -46,37 +37,28 @@ export default function Home() {
         <div>{valid ? 'valid' : 'invalid'}</div>
         <button
           onClick={() => {
-            difficulty !== difficulties.easy
-              ? setDifficulty(difficulties.easy)
-              : loadNewBoard()
+            setDifficulty(difficulties.easy)
           }}
         >
           Easy
         </button>
         <button
           onClick={() => {
-            difficulty !== difficulties.medium
-              ? setDifficulty(difficulties.medium)
-              : loadNewBoard()
+            setDifficulty(difficulties.medium)
           }}
         >
           Medium
         </button>
         <button
           onClick={() => {
-            difficulty !== difficulties.hard
-              ? setDifficulty(difficulties.hard)
-              : loadNewBoard()
+            setDifficulty(difficulties.hard)
           }}
         >
           Hard
         </button>
         <button
           onClick={() => {
-            const newDifficulty = randomDifficulty()
-            difficulty !== newDifficulty
-              ? setDifficulty(newDifficulty)
-              : loadNewBoard()
+            setDifficulty(randomDifficulty())
           }}
         >
           Random
