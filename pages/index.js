@@ -7,6 +7,9 @@ import { useState } from 'react'
 export default function Home() {
   const [difficulty, setDifficulty] = useState('easy')
   const { board, set, update, clear, validate, solve } = useBoard(difficulty)
+  const [valid, setValid] = useState(true)
+
+  console.log({ valid })
 
   return (
     <div className={styles.container}>
@@ -25,6 +28,14 @@ export default function Home() {
         >
           Solve
         </button>
+        <button
+          onClick={() => {
+            setValid(validate())
+          }}
+        >
+          Validate
+        </button>
+        <div>{valid ? 'valid' : 'invalid'}</div>
       </main>
     </div>
   )
