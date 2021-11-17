@@ -3,6 +3,7 @@ import styles from '../styles/Home.module.css'
 import { Board } from '../components/board'
 import { useBoard, useFetch } from '../hooks'
 import { useState } from 'react'
+import { difficulties, randomDifficulty } from '../common/util/difficulty'
 
 export default function Home() {
   const [difficulty, setDifficulty] = useState('easy')
@@ -34,6 +35,35 @@ export default function Home() {
           Validate
         </button>
         <div>{valid ? 'valid' : 'invalid'}</div>
+        <button
+          onClick={() => {
+            setDifficulty(difficulties.easy)
+          }}
+        >
+          easy
+        </button>
+        <button
+          onClick={() => {
+            setDifficulty(difficulties.medium)
+          }}
+        >
+          medium
+        </button>
+        <button
+          onClick={() => {
+            setDifficulty(difficulties.hard)
+          }}
+        >
+          hard
+        </button>
+        <button
+          onClick={() => {
+            setDifficulty(randomDifficulty())
+          }}
+        >
+          random
+        </button>
+        <div>{difficulty}</div>
       </main>
     </div>
   )

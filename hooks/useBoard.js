@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { isValid, solvePuzzle } from '../common/util/sudokusolver'
+import { cloneGrid } from '../common/util/cloneGrid'
 
 const defaultBoard = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -14,7 +15,7 @@ const defaultBoard = [
 ]
 
 function convertBoard(board) {
-  const result = [...defaultBoard]
+  const result = cloneGrid(defaultBoard)
   for (const key in board.puzzle) {
     const row = key.charCodeAt(0) - 65
     const column = key.substr(1) - 1
@@ -24,11 +25,11 @@ function convertBoard(board) {
 }
 
 export function useBoard(difficulty) {
-  const [board, setBoard] = useState(defaultBoard)
+  const [board, setBoard] = useState(cloneGrid(defaultBoard))
 
   useEffect(() => {
     updateBoard()
-  }, [])
+  }, [difficulty])
 
   const updateBoard = () => {
     fetch(
@@ -38,8 +39,8 @@ export function useBoard(difficulty) {
         if (res.ok) return res.json()
         return res.json().then(json => Promise.reject(json))
       })
-      .then(board => {
-        setBoard(convertBoard(board))
+      .then(newBoard => {
+        setBoard(convertBoard(newBoard))
       })
       .catch(error => {
         console.log(error)
@@ -48,7 +49,7 @@ export function useBoard(difficulty) {
 
   function update(position, newElement) {
     const newValue = newElement.substr(newElement.length - 1)
-    let copy = [...board]
+    let copy = cloneGrid(board)
     copy[position.row][position.column] = parseInt(newValue)
     setBoard(copy)
   }
@@ -69,7 +70,7 @@ export function useBoard(difficulty) {
   }
 
   function solve() {
-    const resultBoard = [...board]
+    const resultBoard = cloneGrid(board)
     solvePuzzle(resultBoard)
     setBoard(resultBoard)
   }
