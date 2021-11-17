@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { isValid, solvePuzzle } from '../common/util/sudokusolver'
 import { cloneGrid } from '../common/util/cloneGrid'
+import { difficulties } from '../common/util/difficulty'
 
 const defaultBoard = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -24,14 +25,17 @@ function convertBoard(board) {
   return result
 }
 
-export function useBoard(difficulty) {
+export function useBoard() {
+  const [difficulty, setDifficulty] = useState('easy')
   const [board, setBoard] = useState(cloneGrid(defaultBoard))
 
   useEffect(() => {
-    updateBoard()
+    if (difficulty !== difficulties.none) {
+      loadNewBoard()
+    }
   }, [difficulty])
 
-  const updateBoard = () => {
+  const loadNewBoard = () => {
     fetch(
       `https://vast-chamber-17969.herokuapp.com/generate?difficulty=${difficulty}`
     )
@@ -56,6 +60,7 @@ export function useBoard(difficulty) {
 
   function clear() {
     setBoard(defaultBoard)
+    setDifficulty(difficulties.none)
   }
 
   function validate() {
@@ -75,5 +80,15 @@ export function useBoard(difficulty) {
     setBoard(resultBoard)
   }
 
-  return { board, set: setBoard, update, clear, validate, solve }
+  return {
+    board,
+    set: setBoard,
+    update,
+    clear,
+    validate,
+    solve,
+    loadNewBoard,
+    setDifficulty,
+    difficulty,
+  }
 }

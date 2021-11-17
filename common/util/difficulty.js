@@ -2,6 +2,7 @@ export const difficulties = {
   easy: 'easy',
   medium: 'medium',
   hard: 'hard',
+  none: 'none',
 }
 
 export function randomDifficulty() {

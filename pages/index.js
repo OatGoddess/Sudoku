@@ -6,8 +6,17 @@ import { useState } from 'react'
 import { difficulties, randomDifficulty } from '../common/util/difficulty'
 
 export default function Home() {
-  const [difficulty, setDifficulty] = useState('easy')
-  const { board, set, update, clear, validate, solve } = useBoard(difficulty)
+  const {
+    board,
+    set,
+    update,
+    clear,
+    validate,
+    solve,
+    loadNewBoard,
+    difficulty,
+    setDifficulty,
+  } = useBoard(difficulty)
   const [valid, setValid] = useState(true)
 
   return (
@@ -37,33 +46,49 @@ export default function Home() {
         <div>{valid ? 'valid' : 'invalid'}</div>
         <button
           onClick={() => {
-            setDifficulty(difficulties.easy)
+            difficulty !== difficulties.easy
+              ? setDifficulty(difficulties.easy)
+              : loadNewBoard()
           }}
         >
-          easy
+          Easy
         </button>
         <button
           onClick={() => {
-            setDifficulty(difficulties.medium)
+            difficulty !== difficulties.medium
+              ? setDifficulty(difficulties.medium)
+              : loadNewBoard()
           }}
         >
-          medium
+          Medium
         </button>
         <button
           onClick={() => {
-            setDifficulty(difficulties.hard)
+            difficulty !== difficulties.hard
+              ? setDifficulty(difficulties.hard)
+              : loadNewBoard()
           }}
         >
-          hard
+          Hard
         </button>
         <button
           onClick={() => {
-            setDifficulty(randomDifficulty())
+            const newDifficulty = randomDifficulty()
+            difficulty !== newDifficulty
+              ? setDifficulty(newDifficulty)
+              : loadNewBoard()
           }}
         >
-          random
+          Random
         </button>
         <div>{difficulty}</div>
+        <button
+          onClick={() => {
+            clear()
+          }}
+        >
+          Clear
+        </button>
       </main>
     </div>
   )
