@@ -9,8 +9,6 @@ export default function Home() {
   const { board, set, update, clear, validate, solve } = useBoard(difficulty)
   const [valid, setValid] = useState(true)
 
-  console.log({ valid })
-
   return (
     <div className={styles.container}>
       <Head>
