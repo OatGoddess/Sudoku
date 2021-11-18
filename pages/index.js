@@ -11,7 +11,7 @@ import { Button, StatusButton } from '../components/common'
 export default function Home() {
   const { board, update, clear, validate, solve, difficulty, setDifficulty } =
     useBoard()
-  const [valid, setValid] = useState(true)
+  const [valid, setValid] = useState('valid')
 
   return (
     <div className={styles.container}>
@@ -73,20 +73,22 @@ export default function Home() {
             Clear
           </Button>
         </div>
-        <StatusButton
-          text='Validate'
-          status={valid ? 'valid' : 'invalid'}
-          onClick={() => {
-            setValid(validate())
-          }}
-        />
-        <Button
-          onClick={() => {
-            solve()
-          }}
-        >
-          Solve
-        </Button>
+        <div className={styles.puzzleFunctionBar}>
+          <StatusButton
+            text='Validate'
+            status={valid}
+            onClick={() => {
+              setValid(validate())
+            }}
+          />
+          <Button
+            onClick={() => {
+              solve()
+            }}
+          >
+            Solve
+          </Button>
+        </div>
       </main>
     </div>
   )

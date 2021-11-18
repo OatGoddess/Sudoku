@@ -1,12 +1,10 @@
 .primaryButton {
-  padding: 0.5em;
+  padding: 1em;
   border: 1px solid black;
   background-color: white;
 }
 
 .primaryButton:hover {
-  padding: 0.5em;
-  border: 1px solid black;
   background-color: lightgreen;
 }
 

@@ -56,7 +56,8 @@ export function useBoard() {
   }
 
   const update = (position, newElement) => {
-    const newValue = newElement.substr(newElement.length - 1)
+    const newValue =
+      newElement.length > 0 ? newElement.substr(newElement.length - 1) : 0
     let copy = cloneGrid(board)
     copy[position.row][position.column] = parseInt(newValue)
     setBoard(copy)
@@ -68,14 +69,19 @@ export function useBoard() {
   }
 
   const validate = () => {
+    let complete = true
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
+        if (board[i][j] === 0) {
+          complete = false
+        }
         if (board[i][j] != 0 && !isValid(board, i, j, board[i][j])) {
-          return false
+          return 'broken'
         }
       }
     }
-    return true
+
+    return complete ? 'solved' : 'valid'
   }
 
   const solve = () => {

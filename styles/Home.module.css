@@ -36,6 +36,12 @@
   margin: 0.5em;
 }
 
+.puzzleFunctionBar {
+  display: flex;
+  flex-direction: row;
+  gap: 3em;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
