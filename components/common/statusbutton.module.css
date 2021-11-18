@@ -1,0 +1,11 @@
+.statusButton {
+  display: flex;
+  flex-direction: row;
+}
+
+.status {
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 1em;
+}

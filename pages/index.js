@@ -6,7 +6,7 @@ import { Board } from '../components/board'
 import { useBoard } from '../hooks'
 import { useState } from 'react'
 import { difficulties, randomDifficulty } from '../common/util/difficulty'
-import { Button } from '../components/common'
+import { Button, StatusButton } from '../components/common'
 
 export default function Home() {
   const { board, update, clear, validate, solve, difficulty, setDifficulty } =
@@ -73,16 +73,13 @@ export default function Home() {
             Clear
           </Button>
         </div>
-        <div>
-          <Button
-            onClick={() => {
-              setValid(validate())
-            }}
-          >
-            Validate
-          </Button>
-          <div>{valid ? 'valid' : 'invalid'}</div>
-        </div>
+        <StatusButton
+          text='Validate'
+          status={valid ? 'valid' : 'invalid'}
+          onClick={() => {
+            setValid(validate())
+          }}
+        />
         <Button
           onClick={() => {
             solve()
