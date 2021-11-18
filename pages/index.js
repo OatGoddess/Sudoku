@@ -6,6 +6,7 @@ import { Board } from '../components/board'
 import { useBoard } from '../hooks'
 import { useState } from 'react'
 import { difficulties, randomDifficulty } from '../common/util/difficulty'
+import { Button } from '../components/common'
 
 export default function Home() {
   const { board, update, clear, validate, solve, difficulty, setDifficulty } =
@@ -26,57 +27,69 @@ export default function Home() {
           <Image src={Icon} alt='Sudoku Icon' width={75} height={75} />
         </div>
         <Board board={board} updateCell={update} />
-        <button
+        <div className={styles.buttonBar}>
+          <h2>Difficulty:</h2>
+          <Button
+            onClick={() => {
+              setDifficulty(difficulties.easy)
+            }}
+            selectable
+            selected={difficulty === difficulties.easy}
+          >
+            Easy
+          </Button>
+          <Button
+            onClick={() => {
+              setDifficulty(difficulties.medium)
+            }}
+            selectable
+            selected={difficulty === difficulties.medium}
+          >
+            Medium
+          </Button>
+          <Button
+            onClick={() => {
+              setDifficulty(difficulties.hard)
+            }}
+            selectable
+            selected={difficulty === difficulties.hard}
+          >
+            Hard
+          </Button>
+          <Button
+            onClick={() => {
+              setDifficulty(randomDifficulty())
+            }}
+            selectable
+          >
+            Random
+          </Button>
+          <Button
+            onClick={() => {
+              clear()
+            }}
+            selectable
+          >
+            Clear
+          </Button>
+        </div>
+        <div>
+          <Button
+            onClick={() => {
+              setValid(validate())
+            }}
+          >
+            Validate
+          </Button>
+          <div>{valid ? 'valid' : 'invalid'}</div>
+        </div>
+        <Button
           onClick={() => {
             solve()
           }}
         >
           Solve
-        </button>
-        <button
-          onClick={() => {
-            setValid(validate())
-          }}
-        >
-          Validate
-        </button>
-        <div>{valid ? 'valid' : 'invalid'}</div>
-        <button
-          onClick={() => {
-            setDifficulty(difficulties.easy)
-          }}
-        >
-          Easy
-        </button>
-        <button
-          onClick={() => {
-            setDifficulty(difficulties.medium)
-          }}
-        >
-          Medium
-        </button>
-        <button
-          onClick={() => {
-            setDifficulty(difficulties.hard)
-          }}
-        >
-          Hard
-        </button>
-        <button
-          onClick={() => {
-            setDifficulty(randomDifficulty())
-          }}
-        >
-          Random
-        </button>
-        <div>{difficulty}</div>
-        <button
-          onClick={() => {
-            clear()
-          }}
-        >
-          Clear
-        </button>
+        </Button>
       </main>
     </div>
   )
